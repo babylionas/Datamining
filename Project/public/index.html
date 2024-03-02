@@ -1,0 +1,78 @@
+<!-- ไฟล์ index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css"> <!-- ตรวจสอบ path ถูกต้อง -->
+    <title>ADIVINO</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <span class="name">ADIVINO</span>
+        </div>
+
+        <div class="svg-head">
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                <circle cx="17" cy="17" r="16" stroke="white" stroke-width="2"/>
+                <path d="M4.87564 24L17 3L29.1244 24H4.87564Z" stroke="white" stroke-width="2"/>
+                <line x1="4.91381" y1="5.59386" x2="16.9138" y2="32.5939" stroke="white" stroke-width="2"/>
+                <line x1="28.9191" y1="5.39392" x2="16.9191" y2="33.3939" stroke="white" stroke-width="2"/>
+              </svg>
+        </div>
+
+    </header>
+
+    <!-- CONTENT -->
+    <div class="content">
+        
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+              <a href="#about">About</a>
+              <a href="#base">Base</a>
+              <a href="#blog">Blog</a>
+              <a href="#contact">Contact</a>
+              <a href="#custom">Custom</a>
+              <a href="#support">Support</a>
+              <a href="#tools">Tools</a>
+            </div>
+          </div>
+       
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        <div class="ft-content">
+            <div class="svg-small">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                    <circle cx="17" cy="17" r="16" stroke="black" stroke-width="2"/>
+                    <path d="M4.87564 23L17 2L29.1244 23H4.87564Z" stroke="black" stroke-width="2"/>
+                    <line x1="4.91381" y1="5.59386" x2="16.9138" y2="32.5939" stroke="black" stroke-width="2"/>
+                    <line x1="28.9191" y1="5.39392" x2="16.9191" y2="33.3939" stroke="black" stroke-width="2"/>
+                  </svg>
+            </div>
+            <div class="line"></div>
+            <span class="footer-text">Develop by ADIVINO team</span>
+
+            
+        </div>
+
+        <div class="ft-end">
+            <span class="ft-lefttext">© 2024 ADIVINO Inc.</span>
+        </div>
+
+        
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>

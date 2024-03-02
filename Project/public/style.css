@@ -1,0 +1,264 @@
+@import url();
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* เพิ่ม Media Queries ที่นี่ */
+
+@media only screen and (max-width: 1440px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    header {
+        width: 100%;
+        height: 50px; /* ปรับความสูงของ header ตามต้องการ */
+    }
+
+    .logo {
+        margin-left: 20px; /* ปรับระยะห่างซ้ายของ logo ตามต้องการ */
+        font-size: 28px; /* ปรับขนาด font-size ของ logo ตามต้องการ */
+    }
+
+    .logo svg {
+        width: 24px; /* ปรับขนาดของ SVG ตามต้องการ */
+        height: 24px;
+        fill: white; /* สีของ SVG */
+        margin-right: 10px; /* ระยะห่างขวาของ SVG จากชื่อ */
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        font-size: 24px;
+    }
+}
+
+/* สิ้นสุดการเพิ่ม Media Queries */
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto',sans-serif;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    
+}
+
+body {
+    background: linear-gradient(180deg, #000 0.01%, #000 85%);
+
+}
+
+:root {
+    --text-color : #ededed;
+}
+
+html {
+    font-size: 65.5;
+    overflow: hidden;
+}
+/* HEADER */
+
+header {
+    width: 100%;
+    height: 62px;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.01);
+    box-shadow: 0px 4px 100px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(255, 255, 255, 0.25) inset;
+    backdrop-filter: blur(6.25px);
+
+    display: flex;
+    justify-content: left; /* จัดให้อยู่ตรงกลางแนวนอน */
+    align-items: center;
+ }
+
+.logo {
+    display: flex;
+    font-size: 32px;
+    font-weight: 600;
+    font-style: normal;
+    color: white;
+    line-height: normal;
+    letter-spacing: 1px;
+
+    flex-direction: row;
+    padding: 5%;
+}
+
+.name {
+    display: flex;
+    justify-content: left;
+}
+
+.svg-head {
+    margin-left: 60vh;
+    display: flex;
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+    align-items: center;
+}
+
+/* CONTENT */
+
+.content {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    
+    color: #FFF;/* จัดให้อยู่ตรงกลางแนวนอน */
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+  }
+  
+  /* The search field */
+  #myInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* The search field when it gets focus/clicked on */
+  #myInput:focus {outline: 3px solid #ddd;}
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+
+
+/* FOOTER */
+
+.footer {
+    padding: 5px 5%;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+    position: absolute;
+
+    width: 100%;
+    height: 70px;
+    flex-shrink: 0;
+    display: flex;
+
+    border-radius: 10px 10px 0px 0px;
+    background: #FFF;
+    box-shadow: 0px 4px 100px 0px rgba(0, 0, 0, 0.25), 0px 0px 100px 0px rgba(255, 255, 255, 0.25) inset;
+}
+
+.ft-content{
+    display: flex;
+
+
+    padding: 2 2 2 2;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+
+}
+
+.svg-small{
+    width: 34px;
+    height: 34px;
+
+    margin-right: 9px;
+    margin-top: 3px;
+
+    flex-shrink: 0;
+}
+
+.ft-content .line {
+    width: 2px;
+    height: 40px;
+    background: #000;
+    margin-right: 20px;
+    margin-left: 9px;
+    margin-top: 2px;
+  }
+
+
+.footer-text {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 10px;
+}
+.ft-end {
+    display:grid;
+    justify-items: flex-end;
+
+    margin-left: 65%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    padding: 2 2 2 2;
+}
+
+.ft-lefttext {
+    backdrop-filter: blur(36px);
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 10px;
+
+}
+
+
+
+
+
+
