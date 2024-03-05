@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css"> <!-- ตรวจสอบ path ถูกต้อง -->
+    <link rel="stylesheet" href="style.css">
     <title>ADIVINO</title>
 </head>
 <body>
@@ -30,21 +30,134 @@
 
     <!-- CONTENT -->
     <div class="content">
-        
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+
+        <div class="select">
+
+        </div>
+
+        <div class="airline">
+            <label for="dropdown" class="label1">Airline</label>
+            <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"></button>
             <div id="myDropdown" class="dropdown-content">
-              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-              <a href="#about">About</a>
-              <a href="#base">Base</a>
-              <a href="#blog">Blog</a>
-              <a href="#contact">Contact</a>
-              <a href="#custom">Custom</a>
-              <a href="#support">Support</a>
-              <a href="#tools">Tools</a>
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <a href="#9e">9E</a>
+                <a href="#aa">AA</a>
+                <a href="#as">AS</a>
+                <a href="#b6">B6</a>
+                <a href="#co">CO</a>
+                <a href="#dl">DL</a>
+                <a href="#ev">EV</a>
+                <a href="#f9">F9</a>
+                <a href="#fl">FL</a>
+                <a href="#ha">HA</a>
+                <a href="#mq">MQ</a>
+                <a href="#oh">OH</a>
+                <a href="#oo">OO</a>
+                <a href="#ua">UA</a>
+                <a href="#us">US</a>
+                <a href="#wn">WN</a>
+                <a href="#xe">XE</a>
+                <a href="#yv">YV</a>
             </div>
-          </div>
-       
+        </div>
+        </div>
+
+        <div class="de-air">
+            <label for="dropdown" class="label2">Departure airport</label>
+            <div class="dropdown-deair">
+            <button onclick="myFunction()" class="dropbtn-deair"></button>
+            <div id="myDropdown" class="dropdown-content-deair">
+                <input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction()">
+                <a href=Alabama>Alabama</a>
+                <a href=Alaska>Alaska</a>
+                <a href=Arizona>Arizona</a>
+                <a href=Arkansas>Arkansas</a>
+                <a href=California>California</a>
+                <a href=Colorado>Colorado</a>
+                <a href=Connecticut>Connecticut</a>
+                <a href=Florida>Florida</a>
+                <a href=Georgia>Georgia</a>
+                <a href=Guam>Guam</a>
+                <a href=Hawaii>Hawaii</a>
+                <a href=Idaho>Idaho</a>
+                <a href=Illinois>Illinois</a>
+                <a href=Indiana>Indiana</a>
+                <a href=Iowa>Iowa</a>
+                <a href=Kansas>Kansas</a>
+                <a href=Kentucky>Kentucky</a>
+                <a href=Louisiana>Louisiana</a>
+                <a href=Maine>Maine</a>
+                <a href=Maryland>Maryland</a>
+                <a href=Massachusetts>Massachusetts</a>
+                <a href=Michigan>Michigan</a>
+                <a href=Minnesota>Minnesota</a>
+                <a href=Mississippi>Mississippi</a>
+                <a href=Missouri>Missouri</a>
+                <a href=Montana>Montana</a>
+                <a href=Nebraska>Nebraska</a>
+                <a href=Nevada>Nevada</a>
+                <a href=New Hampshire>New Hampshire</a>
+                <a href=New Jersey>New Jersey</a>
+                <a href=New Mexico>New Mexico</a>
+                <a href=New York>New York</a>
+                <a href=North Carolina>North Carolina</a>
+                <a href=North Dakota>North Dakota</a>
+                <a href=Ohio>Ohio</a>
+                <a href=Oklahoma>Oklahoma</a>
+                <a href=Oregon>Oregon</a>
+                <a href=Pennsylvania>Pennsylvania</a>
+                <a href=Puerto Rico>Puerto Rico</a>
+                <a href=Rhode Island>Rhode Island</a>
+                <a href=South Carolina>South Carolina</a>
+                <a href=South Dakota>South Dakota</a>
+                <a href=Tennessee>Tennessee</a>
+                <a href=Texas>Texas</a>
+                <a href=Utah>Utah</a>
+                <a href=Vermont>Vermont</a>
+                <a href=Virgin Islands>Virgin Islands</a>
+                <a href=Virginia>Virginia</a>
+                <a href=Washington>Washington</a>
+                <a href=West Virginia>West Virginia</a>
+                <a href=Wisconsin>Wisconsin</a>
+                <a href=Wyoming>Wyoming</a>
+
+            </div>
+        </div>
+        </div>
+        
+        
+        <!-- User input time ex. 6.30 AM program change hour to minute ( hour * 60 + minute)
+            and normorlize to binary (for what ?)
+        -->
+        <div class="time-de">
+            <label for="dropdown" class="label1">Airline</label>
+            <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <a href="#9e">9E</a>
+                <a href="#aa">AA</a>
+            </div>
+        </div>
+        </div>
+
+        <div class="des-air">
+            <label for="dropdown" class="label1">Airline</label>
+            <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <a href="#9e">9E</a>
+                <a href="#aa">AA</a>
+            </div>
+        </div>
+
+        </div>
+        
+
+
+    
     </div>
 
     <!-- FOOTER -->

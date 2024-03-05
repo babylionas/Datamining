@@ -62,6 +62,8 @@ html {
     font-size: 65.5;
     overflow: hidden;
 }
+
+
 /* HEADER */
 
 header {
@@ -104,74 +106,200 @@ header {
 
 /* CONTENT */
 
+label {
+    color: #FFF;
+    font-weight: 500;
+}
+
 .content {
-    margin-top: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: left;
-    
-    color: #FFF;/* จัดให้อยู่ตรงกลางแนวนอน */
+
 }
 
-/* Dropdown Button */
-.dropbtn {
-    background-color: #04AA6D;
-    color: white;
+
+
+/* Airline dropdown */
+
+.airline { 
+    margin-top: 10vh;
+}
+.label1 {
+    
+    position: fixed;
+    margin-top: 2px;
+    margin-left: 335px;
+
+    font-size: 22px;
+
+}
+
+.dropbtn{
+    background-color: black;
+    color: #ededed;
     padding: 16px;
-    font-size: 16px;
-    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid #FFF;
+    background: #000;
     cursor: pointer;
-  }
-  
-  /* Dropdown button on hover & focus */
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-  }
-  
-  /* The search field */
-  #myInput {
+
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: black;
+}
+
+#myInput {
     box-sizing: border-box;
     background-image: url('searchicon.png');
     background-position: 14px 12px;
     background-repeat: no-repeat;
-    font-size: 16px;
+    font-size: 18px;
     padding: 14px 20px 12px 45px;
     border: none;
+    border-radius: 10px;
     border-bottom: 1px solid #ddd;
-  }
-  
-  /* The search field when it gets focus/clicked on */
-  #myInput:focus {outline: 3px solid #ddd;}
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
+
+    width: 412px;
+}
+
+
+
+.dropdown {
+    margin-top: 3vh;
+    margin-left: 335px;
+    position: fixed;
+    color: #ddd;
+    width: 412px;
+    height: 44px;
+    flex-shrink: 0;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f6f6f6;
+    background-color: black;
+    color: #ededed;
     min-width: 230px;
+
+    border-radius: 10px;
+
+    width: 412px;
+    overflow: auto;
     border: 1px solid #ddd;
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-  .show {display:block;}
+    font-size: 20px;
+    
+}
+
+.dropdown a:hover {background-color: rgba(32, 32, 32, 0.48);}
+
+.show {display: block;}
+
+/* Departure dropdown */
+.de-air {
+    margin-top: 10vh;
+}
+
+.label2 {
+    
+    position: fixed;
+    margin-top: 2px;
+    margin-left: 335px;
+
+    font-size: 22px;
+
+}
+
+.dropbtn-deair{
+    background-color: black;
+    color: #ededed;
+    padding: 16px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid #FFF;
+    background: #000;
+    cursor: pointer;
+
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
+}
+.dropbtn-deair:hover, .dropbtn-deair:focus {
+    background-color: black;
+}
+
+#myInput1 {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 18px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-radius: 10px;
+    border-bottom: 1px solid #ddd;
+
+    width: 412px;
+}
+
+
+
+.dropdown-deair {
+    margin-top: 3vh;
+    margin-left: 335px;
+    position: fixed;
+    color: #ddd;
+    width: 412px;
+    height: 44px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.dropdown-content-deair {
+    display: none;
+    position: absolute;
+    background-color: black;
+    color: #ededed;
+    min-width: 230px;
+
+    border-radius: 10px;
+
+    width: 412px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content-deair a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    
+}
+
+.dropdown-deair a:hover {background-color: rgba(32, 32, 32, 0.48);}
+
+.show {display: block;}
+
+
+/* Time of Departure dropdown */
+
+/* Destination dropdown */
 
 
 
