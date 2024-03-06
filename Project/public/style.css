@@ -63,6 +63,10 @@ html {
     overflow: hidden;
 }
 
+img {
+    width: 100%;
+}
+
 
 /* HEADER */
 
@@ -72,7 +76,7 @@ header {
     flex-shrink: 0;
     background: rgba(0, 0, 0, 0.01);
     box-shadow: 0px 4px 100px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(255, 255, 255, 0.25) inset;
-    backdrop-filter: blur(6.25px);
+        backdrop-filter: blur(6.25px);
 
     display: flex;
     justify-content: left; /* จัดให้อยู่ตรงกลางแนวนอน */
@@ -109,197 +113,182 @@ header {
 label {
     color: #FFF;
     font-weight: 500;
+    font-size: 22px;
 }
 
 .content {
     display: flex;
-    flex-direction: column;
-    justify-content: left;
+}
+
+.select-left {
+    position: fixed;
+    margin-top: 40vh;
+    margin-left: 45vh;
 
 }
 
+.select-right{
+    position: fixed;
+    margin-top: 40vh;
+    margin-left: 100vh;
+}
 
+/* Background */
+.bg {
+    position: fixed;
+    margin-top: 40vh;
+    
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.788),rgb(0, 0, 2), rgb(0, 0, 0));
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+}
 
+.bg1 {
+    position: fixed;
+    margin-top: 35vh;
+    left: 0;
+    background:black;
+    background-position: center;
+    background-size: contain;
+    width: 200vh;
+    height: 200vh;
+}
+
+.img-bg {
+    position: fixed;
+    justify-content: center;
+
+}
+
+/* select left */
 /* Airline dropdown */
 
-.airline { 
-    margin-top: 10vh;
-}
-.label1 {
-    
+
+.airline-ddn {
+    background-color: #000;
     position: fixed;
-    margin-top: 2px;
-    margin-left: 335px;
-
-    font-size: 22px;
-
+    width: 412px;
+    height: 48px;
 }
+  
+.search-box-airline {
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
 
-.dropbtn{
-    background-color: black;
+    background-color: #000;
     color: #ededed;
-    padding: 16px;
-    font-size: 20px;
+    padding: 8px;
+
+    border: 2px solid #ccc;
     border-radius: 10px;
-    border: 2px solid #FFF;
-    background: #000;
-    cursor: pointer;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+
+    font-size: 20px;
+  }
+  
+  .dropdown-list-airline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 20px;
+    overflow-y: auto;
+    display: none;
+    color: #ededed;
 
     width: 412px;
     height: 48px;
     flex-shrink: 0;
-}
-.dropbtn:hover, .dropbtn:focus {
-    background-color: black;
-}
+  }
+  
+  .dropdown-list-airline li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .dropdown-list-airline li:hover {
+    background-color: white;
+  }
 
-#myInput {
-    box-sizing: border-box;
-    background-image: url('searchicon.png');
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
-    font-size: 18px;
-    padding: 14px 20px 12px 45px;
-    border: none;
-    border-radius: 10px;
-    border-bottom: 1px solid #ddd;
-
-    width: 412px;
-}
-
-
-
-.dropdown {
-    margin-top: 3vh;
-    margin-left: 335px;
-    position: fixed;
-    color: #ddd;
-    width: 412px;
-    height: 44px;
-    flex-shrink: 0;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: black;
-    color: #ededed;
-    min-width: 230px;
-
-    border-radius: 10px;
-
-    width: 412px;
-    overflow: auto;
-    border: 1px solid #ddd;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: var(--text-color);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 20px;
-    
-}
-
-.dropdown a:hover {background-color: rgba(32, 32, 32, 0.48);}
-
-.show {display: block;}
 
 /* Departure dropdown */
 .de-air {
     margin-top: 10vh;
 }
 
-.label2 {
-    
+.deair-ddn {
+    background-color: #000;
     position: fixed;
-    margin-top: 2px;
-    margin-left: 335px;
-
-    font-size: 22px;
-
+    width: 412px;
+    height: 48px;
 }
+  
+.search-box-deair {
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
 
-.dropbtn-deair{
-    background-color: black;
+    background-color: #000;
     color: #ededed;
-    padding: 16px;
-    font-size: 20px;
+    padding: 8px;
+
+    border: 2px solid #ccc;
     border-radius: 10px;
-    border: 2px solid #FFF;
-    background: #000;
-    cursor: pointer;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+
+    font-size: 20px;
+
+
+  }
+  
+  .dropdown-list-deair {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 20px;
+    overflow-y: auto;
+    display: none;
+    color: #ededed;
 
     width: 412px;
     height: 48px;
     flex-shrink: 0;
-}
-.dropbtn-deair:hover, .dropbtn-deair:focus {
-    background-color: black;
-}
+  }
+  
+  .dropdown-list-deair li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .dropdown-list-deair li:hover {
+    background-color: rgba(32, 32, 32, 0.48);
+  }
 
-#myInput1 {
-    box-sizing: border-box;
-    background-image: url('searchicon.png');
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
-    font-size: 18px;
-    padding: 14px 20px 12px 45px;
-    border: none;
-    border-radius: 10px;
-    border-bottom: 1px solid #ddd;
-
-    width: 412px;
-}
-
-
-
-.dropdown-deair {
-    margin-top: 3vh;
-    margin-left: 335px;
-    position: fixed;
-    color: #ddd;
-    width: 412px;
-    height: 44px;
-    flex-shrink: 0;
-    display: inline-block;
-}
-
-.dropdown-content-deair {
-    display: none;
-    position: absolute;
-    background-color: black;
-    color: #ededed;
-    min-width: 230px;
-
-    border-radius: 10px;
-
-    width: 412px;
-    overflow: auto;
-    border: 1px solid #ddd;
-    z-index: 1;
-}
-
-.dropdown-content-deair a {
-    color: var(--text-color);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 20px;
-    
-}
-
-.dropdown-deair a:hover {background-color: rgba(32, 32, 32, 0.48);}
-
-.show {display: block;}
-
+/* select right */
 
 /* Time of Departure dropdown */
 
+
 /* Destination dropdown */
+.des-air {
+    margin-top: 10vh;
+}
+
+
 
 
 
