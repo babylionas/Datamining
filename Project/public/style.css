@@ -130,8 +130,28 @@ label {
 .select-right{
     position: fixed;
     margin-top: 40vh;
-    margin-left: 100vh;
+    margin-left: 110vh;
 }
+
+/* Confirm button */
+.confirm-all-btn{
+    position: fixed;
+    width: 174px;
+    height: 52px;
+    flex-shrink: 0;
+
+    font-size: 20px;
+    border-radius: 10px;
+    background: #FFF;
+
+    margin-top: 70vh;
+    margin-left: 85vh;
+}
+
+.confirm-all-btn :hover{
+    background-color: rgba(32, 32, 32, 0.48);
+}
+
 
 /* Background */
 .bg {
@@ -217,7 +237,7 @@ label {
   }
   
   .dropdown-list-airline li:hover {
-    background-color: white;
+    background-color: rgba(32, 32, 32, 0.48);
   }
 
 
@@ -355,7 +375,7 @@ label {
     display:grid;
     justify-items: flex-end;
 
-    margin-left: 65%;
+    margin-left: 70%;
     margin-top: 10px;
     margin-bottom: 10px;
 

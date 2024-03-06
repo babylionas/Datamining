@@ -53,3 +53,38 @@ optionsDeair.forEach(option => {
     dropdownListDeair.style.display = 'none';
   });
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const confirmButtons = document.querySelectorAll(".confirm-btn");
+  const confirmAllButton = document.querySelector(".confirm-all-btn");
+
+  confirmButtons.forEach(button => {
+      button.addEventListener("click", function() {
+          console.log("Confirmed:", button.parentElement.textContent.trim());
+      });
+  });
+
+  confirmAllButton.addEventListener("click", function() {
+      const selectedAirline = document.querySelector(".airline .search-box-airline").value;
+      const selectedDeparture = document.querySelector(".de-air .search-box-deair").value;
+      const selectedTime = document.querySelector(".time-de .search-box-deair").value;
+      const selectedDestination = document.querySelector(".des-air .search-box-deair").value;
+
+      console.log("Airline:", selectedAirline);
+      console.log("Departure:", selectedDeparture);
+      console.log("Time:", selectedTime);
+      console.log("Destination:", selectedDestination);
+
+      // ตรวจสอบว่าทุก dropdown ถูกเลือกค่าหรือยัง
+      if (selectedAirline && selectedDeparture && selectedTime && selectedDestination) {
+          console.log("All fields are selected!");
+          // ดำเนินการต่อที่นี่ เช่น ส่งข้อมูลไปยัง API หรือทำการ redirect
+      } else {
+          console.log("Please select all fields!");
+      }
+  });
+});
+
+
