@@ -122,14 +122,14 @@ label {
 
 .select-left {
     position: fixed;
-    margin-top: 40vh;
+    margin-top: 38vh;
     margin-left: 45vh;
 
 }
 
 .select-right{
     position: fixed;
-    margin-top: 40vh;
+    margin-top: 38vh;
     margin-left: 110vh;
 }
 
@@ -144,7 +144,7 @@ label {
     border-radius: 10px;
     background: #FFF;
 
-    margin-top: 70vh;
+    margin-top: 75vh;
     margin-left: 85vh;
 }
 
@@ -185,6 +185,28 @@ label {
     position: fixed;
     justify-content: center;
 
+}
+
+.n1 {
+    position: fixed;
+    margin-top: 8vh;
+    margin-left: 65vh;
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.n2 {
+    position: fixed;
+    margin-top: 10vh;
+    margin-left: 65vh;
+    color: #000;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
 }
 
 /* select left */
@@ -244,7 +266,7 @@ label {
 
 /* Departure dropdown */
 .de-air {
-    margin-top: 10vh;
+    margin-top: 12vh;
 }
 
 .deair-ddn {
@@ -286,7 +308,7 @@ label {
     color: #ededed;
 
     width: 412px;
-    height: 48px;
+    height: 90px;
     flex-shrink: 0;
   }
   
@@ -304,10 +326,11 @@ label {
 /* Time of Departure dropdown */
 
 .time-ddn {
-    background-color: #000;
+    background-color: #ccc;
     position: fixed;
     width: 412px;
     height: 48px;
+    color: #ccc;
 }
 
 .search-box-timede {
@@ -317,6 +340,7 @@ label {
 
     background-color: #000;
     color: #ededed;
+    font-size: 20px;
     padding: 8px;
 
     border: 2px solid #ccc;
@@ -327,9 +351,13 @@ label {
     font-size: 20px;
 }
 
+.action {
+    background-color: #ededed;
+}
+
 /* Destination dropdown */
 .des-air {
-    margin-top: 10vh;
+    margin-top: 7vh;
 }
 
 .desair-ddn {
@@ -371,7 +399,7 @@ label {
     color: #ededed;
 
     width: 412px;
-    height: 48px;
+    height: 90px;
     flex-shrink: 0;
   }
   
