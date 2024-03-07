@@ -1,40 +1,20 @@
 //Model
 let loadedModel;
 
-
-// โหลดโมเดล AI จากไฟล์ JSON
-async function loadModel() {
-  try {
-    const response = await fetch('http://localhost:8000/model');
-    const modelJson = await response.json();
-
-    // นำเข้า TensorFlow.js ให้ถูกต้อง (ไม่ต้องใช้ require หรือ @tensorflow/tfjs-node)
-    const tf = window.tf;
-    
-    // แปลงโมเดล JSON เป็น ModelArtifacts
-    const modelArtifacts = {
-      modelTopology: modelJson,
-      format: 'layers-model',
-    };
-
-    // สร้างโมเดล AI จาก ModelArtifacts
-    loadedModel = await tf.loadLayersModel(tf.io.fromMemory(modelArtifacts));
-
-    // เมื่อโมเดลโหลดเสร็จสามารถใช้งานได้ตามต้องการ
-    console.log('Model loaded successfully:', loadedModel);
-
-    return loadedModel;
-  } catch (error) {
-    console.error('Error loading model:', error);
-    return null;
-  }
-}
-
-// เรียกใช้ฟังก์ชัน loadModel เพื่อโหลดโมเดล AI
+let model;
 loadModel();
 
+async function loadModel() {
+  try {
+      model = await tf.loadLayersModel('https://raw.githubusercontent.com/babylionas/Datamining/main/model/best_model_params.json');
+      // console.log(model);
+      console.log('Model loaded successfully');
+      // You can return the model or perform other operations here.
 
-
+  } catch (error) {
+      console.error('Error loading the model:', error);
+  }
+}
 
 
 // Airline dropdown backend

@@ -144,8 +144,8 @@ label {
     border-radius: 10px;
     background: #FFF;
 
-    margin-top: 75vh;
-    margin-left: 85vh;
+    margin-top: 70vh;
+    margin-left: 90vh;
 }
 
 .confirm-all-btn :hover{
@@ -325,13 +325,6 @@ label {
 
 /* Time of Departure dropdown */
 
-.time-ddn {
-    background-color: #ccc;
-    position: fixed;
-    width: 412px;
-    height: 48px;
-    color: #ccc;
-}
 
 .search-box-timede {
     width: 412px;
@@ -351,13 +344,10 @@ label {
     font-size: 20px;
 }
 
-.action {
-    background-color: #ededed;
-}
 
 /* Destination dropdown */
 .des-air {
-    margin-top: 7vh;
+    margin-top: 5vh;
 }
 
 .desair-ddn {
