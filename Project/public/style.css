@@ -153,6 +153,7 @@ label {
 }
 
 
+
 /* Background */
 .bg {
     position: fixed;
@@ -302,12 +303,86 @@ label {
 
 /* Time of Departure dropdown */
 
+.time-ddn {
+    background-color: #000;
+    position: fixed;
+    width: 412px;
+    height: 48px;
+}
+
+.search-box-timede {
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
+
+    background-color: #000;
+    color: #ededed;
+    padding: 8px;
+
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+
+    font-size: 20px;
+}
 
 /* Destination dropdown */
 .des-air {
     margin-top: 10vh;
 }
 
+.desair-ddn {
+    background-color: #000;
+    position: fixed;
+    width: 412px;
+    height: 48px;
+}
+  
+.search-box-desair {
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
+
+    background-color: #000;
+    color: #ededed;
+    padding: 8px;
+
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+
+    font-size: 20px;
+
+
+  }
+  
+  .dropdown-list-desair {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 20px;
+    overflow-y: auto;
+    display: none;
+    color: #ededed;
+
+    width: 412px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  
+  .dropdown-list-desair li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .dropdown-list-desair li:hover {
+    background-color: rgba(32, 32, 32, 0.48);
+  }
 
 
 

@@ -1,0 +1,1 @@
+{"bootstrap": true, "criterion": "entropy", "max_depth": null, "min_samples_leaf": 3, "min_samples_split": 5, "n_estimators": 51}
