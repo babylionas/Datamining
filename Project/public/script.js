@@ -1,10 +1,11 @@
 //Model
 let loadedModel;
 
+
 // โหลดโมเดล AI จากไฟล์ JSON
 async function loadModel() {
   try {
-    const response = await fetch('C:\code\Datamining\model\best_model_params.json');
+    const response = await fetch('http://localhost:8000/model');
     const modelJson = await response.json();
 
     // นำเข้า TensorFlow.js ให้ถูกต้อง (ไม่ต้องใช้ require หรือ @tensorflow/tfjs-node)
@@ -31,6 +32,8 @@ async function loadModel() {
 
 // เรียกใช้ฟังก์ชัน loadModel เพื่อโหลดโมเดล AI
 loadModel();
+
+
 
 
 
