@@ -4,8 +4,6 @@
 *:after,
 *:before {
   box-sizing: border-box;
-  font-family: 'Roboto' ;
-  scroll-behavior: smooth;
 }
 
 /* เพิ่ม Media Queries ที่นี่ */
@@ -44,47 +42,61 @@
 
 /* สิ้นสุดการเพิ่ม Media Queries */
 
+:root {
+    --text-color : #ededed;
+}
+
+html {
+    overflow: hidden;
+    font-size: 25;
+}
 
 body {
     display: flex;
-    }
+    font-family: 'Roboto' ;
+    scroll-behavior: smooth;
+    position: relative;
 
-.background {
-        background-image: url(https://github.com/babylionas/Datamining/blob/main/Project/public/207265-cloud-airplane-wing-and-plane-hd%202%20(1).png?raw=true);
-        background-size: 100% 50%;
-        background-repeat: no-repeat;
-        background-color: #000;
-        background-position: start;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        left: 0;
-      }
-
+    background-image: url(https://github.com/babylionas/Datamining/blob/main/Project/public/bg-new.png?raw=true);
+    background-size:100%;
+    background-repeat: no-repeat;
+    background-color: #000;
+        
+}
 
 header {
     width: 100%;
-    height: 62px;
+    height: 6vh;
     flex-shrink: 0;
+
     background: rgba(0, 0, 0, 0.01);
     box-shadow: 0px 4px 100px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(255, 255, 255, 0.25) inset;
-    backdrop-filter: blur(6.25px);
+        backdrop-filter: blur(6.25px);
 
     display: flex;
+    justify-content: left; /* จัดให้อยู่ตรงกลางแนวนอน */
     align-items: center;
 }
 
+
 .leftside {
+
     display: flex;
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 600;
     font-style: normal;
-    color: white;
+    color: #000;
     letter-spacing: 1px;
-    padding: 5px 5px 5px 5px;
+    margin: 0;
+
+    padding: 2vh 2vh 2vh 2vh;
 }
+
+.middle {
+    align-items: center;
+    padding:0;
+}
+
 
 
 
