@@ -120,14 +120,13 @@ header {
     justify-content: right;
     align-items: right;
 
-    margin-left: 65vh;
+    margin-left: 60vh;
     padding-left: 10vh;
-    right: 0;
+    right: 2vw;
 }
 
 .hint summary {
     list-style: none;
-          
         &:focus {
           outline: none;
         }
@@ -137,7 +136,38 @@ header {
 }
 
 .hint div {
-    
+    background: #FFF;
+	box-shadow: 0 5px 10px rgba(#000, 0.15);
+	padding: 1vh 2vh 2vh 2vw;
+	border-radius: 10px 0px;
+	position: absolute;
+	width: 580px;
+    height: 93px;
+	max-width: calc(100vw - 2rem);
+	top: calc(100% + 2vh);
+	right: 3vh;
+	overflow: auto;
+	transform-origin: 100% 100%;
+	color: #000;
+}
+
+.hint .p1 {
+    font-size: 20px;
+}
+
+.hint-content {
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+
+@keyframes scale {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 /* CONTENT */
