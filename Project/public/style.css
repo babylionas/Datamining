@@ -401,8 +401,59 @@ label {
   .dropdown-list-desair li:hover {
     background-color: rgba(32, 32, 32, 0.48);
   }
+/* Output */
 
 
+
+/* Add styling for the prediction output */
+.prediction-output {
+    display: block;
+    margin-top: 20px;
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 150px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 4px 4px 4px 0px rgba(255, 255, 255, 0.50) inset, 0px 10px 15.5px 0px rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6.25px);
+    text-align: center;
+    font-size: 30px;
+    
+}
+
+#prediction {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.delay {
+    margin-top: 5vh;
+    color: red;
+}
+
+.nodelay {
+    color: green;
+    margin-top: 5vh;
+}
+
+.closeOutput {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+
+    margin-top: 2vh;
+    margin-left: 170px;
+    position: fixed;
+
+    background-color: transparent;
+
+    cursor: pointer;
+    
+}
 
 
 /* FOOTER */

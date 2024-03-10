@@ -33,6 +33,7 @@
         
         
         
+        
         <div class="bg-content">
             <img src="https://github.com/babylionas/Datamining/blob/main/Project/public/blue-sky-view-from-the-side-of-a-plane-screen-xl.jpg?raw=true" alt="" class="img-bg">
             
@@ -142,11 +143,6 @@
 
 
         <div class="select-right">
-             <!-- User input time ex. 6.30 AM program change hour to minute ( hour * 60 + minute)
-            and normorlize to binary (for what ?)
-        -->
-
-        
         <div class="time-de">
             <label for="dropdown" class="label3">Time of Departure</label>
             <div class="time">
@@ -222,6 +218,17 @@
 
         <button class="confirm-all-btn">Confirm All</button>
 
+        <div class="prediction-output">
+            <button id="closePredictionOutput" class="closeOutput">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M16 1L1 16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 16L1 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <label for="prediction"></label>
+            <output id="prediction"></output>
+            
+        </div>
         
     </div>
     

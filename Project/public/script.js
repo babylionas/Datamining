@@ -1,21 +1,48 @@
 //Model
 let loadedModel;
 
-let model;
-loadModel();
+let output = document.querySelector('output');
 
+let model;
+// โหลด JSON โมเดล
 async function loadModel() {
   try {
-      model = await tf.loadLayersModel('https://raw.githubusercontent.com/babylionas/Datamining/main/model/best_model_params.json');
-      // console.log(model);
-      console.log('Model loaded successfully');
-      // You can return the model or perform other operations here.
+    const response = await fetch('https://raw.githubusercontent.com/babylionas/Datamining/main/model/best_model_params.json');
+    if (!response.ok) {
+      throw new Error('Failed to load model JSON');
+    }
+    const modelData = await response.json();
+    console.log('Model loaded successfully:', modelData);
+    
+    // ทำสิ่งที่ต้องการกับข้อมูลโมเดลที่โหลด เช่น ใช้ในการทำนาย
+    // ตัวอย่างการใช้งาน:
+    const bootstrap = modelData.bootstrap;
+    const criterion = modelData.criterion;
+    const maxDepth = modelData.max_depth;
+    const minSamplesLeaf = modelData.min_samples_leaf;
+    const minSamplesSplit = modelData.min_samples_split;
+    const nEstimators = modelData.n_estimators;
+
+    console.log('Bootstrap:', bootstrap);
+    console.log('Criterion:', criterion);
+    console.log('Max Depth:', maxDepth);
+    console.log('Min Samples Leaf:', minSamplesLeaf);
+    console.log('Min Samples Split:', minSamplesSplit);
+    console.log('Number of Estimators:', nEstimators);
 
   } catch (error) {
-      console.error('Error loading the model:', error);
+    console.error('Error loading the model:', error);
   }
 }
 
+// เรียกใช้ฟังก์ชันโหลดโมเดล
+loadModel();
+
+// ฟังก์ชันทำนายผลลัพธ์จากโมเดล
+function makePrediction(model, inputData) {
+  const prediction = /* ทำนายผลลัพธ์จากโมเดลโดยใช้ข้อมูล input */ 0;
+  return prediction;
+}
 
 // Airline dropdown backend
 const searchBoxAirline = document.querySelector('.search-box-airline');
@@ -101,8 +128,6 @@ optionsDesair.forEach(option => {
   });
 });
 
-
-
 //Time on departure - ACTION 
 
 const timeInput = document.querySelector('.search-box-timede');
@@ -141,42 +166,49 @@ function convertToMinutes(time) {
   return totalMinutes;
 }
 
-const selectedAirlineInput = document.querySelector(".airline .search-box-airline");
-const selectedDepartureInput = document.querySelector(".de-air .search-box-deair");
-const selectedTimeInput = document.querySelector(".time-de .search-box-timede"); // Fix class name
-const selectedDestinationInput = document.querySelector(".des-air .search-box-desair"); // Fix class name
+// ฟังก์ชันที่ใช้ในการหา index ของรายการที่เลือก
+function findIndexInListAirline(selectedValue) {
+  const dropdownList = document.querySelector('.dropdown-list-airline');
+  const options = Array.from(dropdownList.getElementsByTagName('li'));
 
-// Check if elements exist before accessing their value
-const selectedAirline = selectedAirlineInput ? selectedAirlineInput.value : null;
-const selectedDeparture = selectedDepartureInput ? selectedDepartureInput.value : null;
-const selectedTime = selectedTimeInput ? selectedTimeInput.value : null;
-const selectedDestination = selectedDestinationInput ? selectedDestinationInput.value : null;
+  // ใช้ findIndex ของ Array ในการหา index ของรายการที่เลือก
+  const index = options.findIndex(option => option.textContent.trim() === selectedValue);
 
-console.log("Airline:", selectedAirline);
-console.log("Departure:", selectedDeparture);
-console.log("Time:", selectedTime);
-console.log("Destination:", selectedDestination);
-
-if (selectedAirline && selectedDeparture && selectedTime && selectedDestination) {
-    console.log("All fields are selected!");
-    // Proceed with further actions
-} else {
-    console.log("Please select all fields!");
+  return index;
 }
 
+// ฟังก์ชันที่ใช้ในการหา index ของรายการที่เลือก
+function findIndexInListDeairline(selectedValue) {
+  const dropdownList = document.querySelector('.dropdown-list-deair');
+  const options = Array.from(dropdownList.getElementsByTagName('li'));
 
+  // ใช้ findIndex ของ Array ในการหา index ของรายการที่เลือก
+  const index = options.findIndex(option => option.textContent.trim() === selectedValue);
 
+  return index;
+}
+
+// ฟังก์ชันที่ใช้ในการหา index ของรายการที่เลือก
+function findIndexInListDesairline(selectedValue) {
+  const dropdownList = document.querySelector('.dropdown-list-desair');
+  const options = Array.from(dropdownList.getElementsByTagName('li'));
+
+  // ใช้ findIndex ของ Array ในการหา index ของรายการที่เลือก
+  const index = options.findIndex(option => option.textContent.trim() === selectedValue);
+
+  return index;
+}
 
 //Button action
 
 document.addEventListener("DOMContentLoaded", function() {
   const confirmButtons = document.querySelectorAll(".confirm-btn");
   const confirmAllButton = document.querySelector(".confirm-all-btn");
+  const outputElement = document.getElementById('prediction');
+  const closeBtn = document.getElementById('closePredictionOutput');
 
-  confirmButtons.forEach(button => {
-      button.addEventListener("click", function() {
-          console.log("Confirmed:", button.parentElement.textContent.trim());
-      });
+  closeBtn.addEventListener('click', function() {
+    outputElement.style.display = 'none';
   });
 
   confirmAllButton.addEventListener("click", function() {
@@ -194,40 +226,50 @@ document.addEventListener("DOMContentLoaded", function() {
     if (selectedAirline && selectedDeparture && selectedTime && selectedDestination) {
         console.log("All fields are selected!");
   
+        // ทำการ normalize ค่าที่ได้จาก dropdown ของ airline, departure, และ destination เป็น index ของ list
+        const airlineIndex = findIndexInListAirline(selectedAirline);
+        const departureIndex = findIndexInListDeairline(selectedDeparture);
+        const destinationIndex = findIndexInListDesairline(selectedDestination);
+
+        console.log("Airline Index:", airlineIndex);
+        console.log("Departure Index:", departureIndex);
+        console.log("Destination Index:", destinationIndex);
+
+        // ทำการ normalize ค่าของเวลา (time) เป็นนาที
+
+        const maxTime =  1439;
+        const minTime = 10;
+        const beforenalizedTime = convertToMinutes(selectedTime);
+        let normalizedTime = (beforenalizedTime-minTime) / (maxTime-minTime);
+        const resultNormalizeTime = normalizedTime; 
+        console.log("Normalized Time (minutes):", resultNormalizeTime);
+
         // เตรียมข้อมูล input สำหรับทำนาย
-        const inputData = [selectedAirline, selectedDeparture, selectedTime, selectedDestination];
+        const inputData = [airlineIndex, departureIndex,  destinationIndex, resultNormalizeTime];
   
+
         // ทำการทำนายด้วยโมเดล AI
         const prediction = makePrediction(loadedModel, inputData);
         console.log("Prediction:", prediction);
-        
-        // ดำเนินการต่อที่นี่ เช่น ส่งข้อมูลไปยัง API หรือทำการ redirect
+
+        // แสดงผลลัพธ์การทำนาย
+        if (prediction === 0) {
+          outputElement.textContent = "Not Delay";
+          outputElement.classList.add('nodelay');
+          outputElement.classList.remove('delay');
+        } else if (prediction === 1) {
+          outputElement.textContent = "Delay";
+          outputElement.classList.add('delay');
+          outputElement.classList.remove('nodelay');
+        }
+
+        outputElement.style.display = 'block';
     } else {
         console.log("Please select all fields!");
+        outputElement.classList.remove('delay');
+        outputElement.classList.remove('nodelay');
+        outputElement.style.display = 'block';
     }
   });
 
 });
-
-// ฟังก์ชันสำหรับทำนายด้วยโมเดล AI
-function makePrediction(model, inputData) {
-  // ตรวจสอบข้อมูล input และปรับให้เป็นรูปแบบที่โมเดล AI รับเข้ามาได้
-  // สำหรับตัวอย่างนี้เราจะสมมติว่าโมเดล AI รับข้อมูลเป็น array ของขนาด 4
-  
-  // สำหรับตัวอย่างเพื่อเทส
-  // ให้เขียนโค้ดเพิ่มเองเพื่อแปลงข้อมูล input เป็นรูปแบบที่โมเดล AI รับได้
-  // เช่น การทำ One-hot encoding หรือ normalization
-
-  // ส่งข้อมูล input เข้าโมเดล AI สำหรับทำนาย
-  const inputDataTensor = tf.tensor2d([inputData]); // สมมติว่าโมเดล AI รับข้อมูลเป็น tensor ขนาด 1x4
-  const prediction = model.predict(inputDataTensor);
-  
-  // แปลงผลลัพธ์ที่ได้เป็น JavaScript array
-  const predictionArray = Array.from(prediction.dataSync());
-  
-  return predictionArray;
-}
-
-function normalization( ){
-
-}

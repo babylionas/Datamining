@@ -1,8 +1,9 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from sklearn.ensemble import RandomForestClassifier
 
 # ไฟล์ JSON ที่จะโหลด
-JSON_FILE = "C:/code/Datamining/model/best_model_params.json"
+JSON_FILE = "https://raw.githubusercontent.com/babylionas/Datamining/main/model/best_model_params.json"
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):

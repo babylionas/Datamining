@@ -1,41 +1,165 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-.select-box {
-  position: relative;
-  width: 200px;
-}
+    *,
+    *:after,
+    *:before {
+      box-sizing: border-box;
+    }
 
-.search-box {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
-}
+    body {
+      font-family: 'Inter', Arial, sans-serif; /* เปลี่ยนเป็น Inter และเพิ่ม ; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-.dropdown-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow-y: auto;
-  display: none;
-}
+    .content {
+      position: relative;
+    }
 
-.dropdown-list li {
-  padding: 8px;
-  cursor: pointer;
-}
+    .button {
+      appearance: none;
+      background: #16a34a;
+      border-radius: 0.25em;
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 500;
+      height: 3em;
+      line-height: 3em;
+      padding: 0 1em;
+    
+      &:hover {
+        background-color: lighten(#16a34a, 2%);
+      }
+    }
+    
+    .details-modal {
+      background: #ffffff;
+      border-radius: 0.5em;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* แก้ rgba(black, 0.2) เป็น rgba(0, 0, 0, 0.2) */
+      left: 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 498px;
+      text-align: left;
+      max-height: 90vh;
+      display: none; 
+    }
+    
+    .details-modal-close {
+      align-items: center;
+      color: #111827;
+      display: flex;
+      height: 4.5em;
+      justify-content: center;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 4.5em;
+    
+      svg {
+        display: block;
+      }
+    }
+    
+    .details-modal-title {
+      color: green;
+      padding: 2vh 1vh;
+      pointer-events: all;
+      position: relative;
+      width: calc(100% - 4.5em);
+      align-items: center;
+      text-align: center;
+    
+    }
 
-.dropdown-list li:hover {
-  background-color: #f1f1f1;
-}
+    .details-modal-title h1 {
+      font-size: 45px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    
+    .details-modal-content {
+      border-top: 1px solid #e0e0e0;
+      padding: 2em;
+      pointer-events: all;
+      overflow: auto;
+    }
+    
+    .details-modal-overlay {
+      transition: opacity 0.2s ease-out;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.8); /* เปลี่ยน #0f172a เป็น rgba(15, 23, 42, 0.8) */
+      position: fixed;
+      opacity: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      top: 0;
+    
+      details[open] & {
+        pointer-events: all;
+        opacity: 0.5;
+      }
+    }
+    
+    details {
+      summary {
+        list-style: none;
+          
+        &:focus {
+          outline: none;
+        }
+        &::-webkit-details-marker {
+          display: none;
+        }
+      }
+    }
+    
+    code {
+      font-family: Monaco, monospace;
+      line-height: 100%;
+      background-color: #2d2d2c;
+      padding: 0.1em 0.4em;
+      letter-spacing: -0.05em;
+      word-break: normal;
+      border-radius: 7px;
+      color: white;
+      font-weight: normal;
+      font-size: 1.75rem;
+      position: relative;
+      top: -2px;
+    }
+
+    details[open] .details-modal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    details[open] .details-modal-overlay {
+      pointer-events: all;
+      opacity: 0.5;
+    }
+
+    .hint {
+      margin-top: 5px;
+      width: 385px;
+      height: 23px;
+      flex-shrink: 0;
+    }
+
+    @keyframes scale {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
