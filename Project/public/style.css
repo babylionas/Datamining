@@ -23,22 +23,40 @@
         height: 50px; /* ปรับความสูงของ header ตามต้องการ */
     }
 
-    .logo {
-        margin-left: 20px; /* ปรับระยะห่างซ้ายของ logo ตามต้องการ */
-        font-size: 28px; /* ปรับขนาด font-size ของ logo ตามต้องการ */
+    .h {
+        margin-left: 20px ;
+        font-size: 32px;
     }
 
-    .logo svg {
+    .svg-head {
         width: 24px; /* ปรับขนาดของ SVG ตามต้องการ */
         height: 24px;
         fill: white; /* สีของ SVG */
-        margin-right: 10px; /* ระยะห่างขวาของ SVG จากชื่อ */
+        margin-right: 10px;
+    }
+
+    .hint {
+        margin-left: 30vh;
+        padding-left: 10vh;
     }
 }
 
 @media only screen and (max-width: 768px) {
     .logo {
         font-size: 24px;
+    }
+
+    .svg-head {
+        width: 24px; /* ปรับขนาดของ SVG ตามต้องการ */
+        height: 24px;
+        fill: white; /* สีของ SVG */
+        margin-right: 10px;
+    }
+
+
+    .hint {
+        margin-left: 10vh;
+        padding-left: 10vh;
     }
 }
 
@@ -120,9 +138,13 @@ header {
     justify-content: right;
     align-items: right;
 
-    margin-left: 60vh;
+    margin-left: 75vh;
     padding-left: 10vh;
     right: 2vw;
+
+    &[open] div {
+		animation: scale 0.25s ease;
+	}
 }
 
 .hint summary {
@@ -138,35 +160,38 @@ header {
 .hint div {
     background: #FFF;
 	box-shadow: 0 5px 10px rgba(#000, 0.15);
-	padding: 1vh 2vh 2vh 2vw;
+	padding: 1vh 1vh 1vh 1vh; 
 	border-radius: 10px 0px;
 	position: absolute;
 	width: 580px;
-    height: 93px;
+    height: 100px;
 	max-width: calc(100vw - 2rem);
-	top: calc(100% + 2vh);
-	right: 3vh;
+	top: calc(100% + 2px);
+	right: 10vh;
 	overflow: auto;
 	transform-origin: 100% 100%;
 	color: #000;
+
+    &::-webkit-details-marker {
+		display: none;
+	}
+
 }
 
 .hint .p1 {
     font-size: 20px;
 }
 
-.hint-content {
-    margin-left: 2px;
-    margin-right: 5px;
-}
 
 
 @keyframes scale {
 	0% {
-		transform: scale(0);
+		transform: translateY(-100%);
+        opacity: 0;
 	}
 	100% {
-		transform: scale(1);
+		transform: translateY(0);
+        opacity: 1;
 	}
 }
 
