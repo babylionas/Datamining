@@ -273,3 +273,22 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 });
+
+  const confirmButton = document.querySelector('.confirm-all-button');
+  const detailsModalOverlay = document.querySelector('.details-modal-overlay');
+
+  confirmButton.addEventListener('click', function() {
+    detailsModalOverlay.classList.add('show');
+  });
+
+  const detailsModalClose = document.querySelector('.details-modal-close');
+
+  detailsModalClose.addEventListener('click', function() {
+    detailsModalOverlay.classList.remove('show');
+  });
+
+  detailsModalClose.addEventListener('click', function() {
+    detailsModalOverlay.classList.remove('show');
+    document.querySelector('.details-modal-close').style.display = 'block';
+  });
+  

@@ -19,147 +19,74 @@
       position: relative;
     }
 
-    .button {
-      appearance: none;
-      background: #16a34a;
-      border-radius: 0.25em;
-      color: white;
-      cursor: pointer;
-      display: inline-block;
-      font-weight: 500;
-      height: 3em;
-      line-height: 3em;
-      padding: 0 1em;
-    
-      &:hover {
-        background-color: lighten(#16a34a, 2%);
-      }
+    :root {
+      --vs-primary: 29 92 255;
     }
     
-    .details-modal {
-      background: #ffffff;
-      border-radius: 0.5em;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* แก้ rgba(black, 0.2) เป็น rgba(0, 0, 0, 0.2) */
-      left: 50%;
-      pointer-events: none;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 498px;
-      text-align: left;
-      max-height: 90vh;
-      display: none; 
-    }
-    
-    .details-modal-close {
-      align-items: center;
-      color: #111827;
+    .wrapper {
+      height: 100vh;
+      /* This part is important for centering the content */
       display: flex;
-      height: 4.5em;
+      align-items: center;
       justify-content: center;
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 4.5em;
-    
-      svg {
-        display: block;
-      }
+      /* End center */
+      background: -webkit-linear-gradient(to right, #834d9b, #d04ed6);
+      background: linear-gradient(to right, #834d9b, #d04ed6);
     }
     
-    .details-modal-title {
-      color: green;
-      padding: 2vh 1vh;
-      pointer-events: all;
-      position: relative;
-      width: calc(100% - 4.5em);
-      align-items: center;
-      text-align: center;
-    
-    }
-
-    .details-modal-title h1 {
-      font-size: 45px;
-      font-weight: 600;
-      line-height: normal;
+    .wrapper a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 3px;
+      text-transform: uppercase;
+      color: #585858;
+      font-family: 'Roboto', sans-serif;
     }
     
-    .details-modal-content {
-      border-top: 1px solid #e0e0e0;
-      padding: 2em;
-      pointer-events: all;
-      overflow: auto;
-    }
-    
-    .details-modal-overlay {
-      transition: opacity 0.2s ease-out;
-      pointer-events: none;
-      background: rgba(15, 23, 42, 0.8); /* เปลี่ยน #0f172a เป็น rgba(15, 23, 42, 0.8) */
-      position: fixed;
+    .modal {
+      visibility: hidden;
       opacity: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
+      position: absolute;
       top: 0;
-    
-      details[open] & {
-        pointer-events: all;
-        opacity: 0.5;
-      }
-    }
-    
-    details {
-      summary {
-        list-style: none;
-          
-        &:focus {
-          outline: none;
-        }
-        &::-webkit-details-marker {
-          display: none;
-        }
-      }
-    }
-    
-    code {
-      font-family: Monaco, monospace;
-      line-height: 100%;
-      background-color: #2d2d2c;
-      padding: 0.1em 0.4em;
-      letter-spacing: -0.05em;
-      word-break: normal;
-      border-radius: 7px;
-      color: white;
-      font-weight: normal;
-      font-size: 1.75rem;
-      position: relative;
-      top: -2px;
-    }
-
-    details[open] .details-modal {
+      right: 0;
+      bottom: 0;
+      left: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      background: rgba(77, 77, 77, .7);
+      transition: all .4s;
     }
-
-    details[open] .details-modal-overlay {
-      pointer-events: all;
-      opacity: 0.5;
+    
+    .modal:target {
+      visibility: visible;
+      opacity: 1;
     }
-
-    .hint {
-      margin-top: 5px;
-      width: 385px;
-      height: 23px;
-      flex-shrink: 0;
+    
+    .modal__content {
+      border-radius: 4px;
+      position: relative;
+      width: 500px;
+      max-width: 90%;
+      background: #fff;
+      padding: 1em 2em;
     }
-
-    @keyframes scale {
-      0% {
-        transform: scale(0);
+    
+    .modal__footer {
+      text-align: right;
+      a {
+        color: #585858;
       }
-      100% {
-        transform: scale(1);
+      i {
+        color: #d02d2c;
       }
+    }
+    .modal__close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #585858;
+      text-decoration: none;
     }
