@@ -1,6 +1,6 @@
 @import url();
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:wght@300;400;500&display=swap');
 
 *,
 *:after,
@@ -44,19 +44,6 @@
 @media only screen and (max-width: 768px) {
     .logo {
         font-size: 24px;
-    }
-
-    .svg-head {
-        width: 24px; /* ปรับขนาดของ SVG ตามต้องการ */
-        height: 24px;
-        fill: white; /* สีของ SVG */
-        margin-right: 10px;
-    }
-
-
-    .hint {
-        margin-left: 10vh;
-        padding-left: 10vh;
     }
 }
 
@@ -127,7 +114,7 @@ header {
 
 .svg-head {
     padding-left: 10vh;
-    padding-right: 10vh;
+    padding-right: 5vh;
     margin-left: 60vh;
     display: flex;
     justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
@@ -138,6 +125,7 @@ header {
     display: flex;
     justify-content: right;
     align-items: right;
+    font-family: "Noto Sans Thai";
 
     margin-left: 70vh;
     padding-left: 10vh;
@@ -159,13 +147,13 @@ header {
 }
 
 .hint div {
-    background: #FFF;
+  background: #FFF;
 	box-shadow: 0 5px 10px rgba(#000, 0.15);
-	padding: 5px 5px 5px 5px; 
+	padding: 10px 10px 10px 10px;
 	border-radius: 10px 0px;
 	position: absolute;
-	width: 580px;
-    height: 130px;
+	width: 540px;
+  height: 130px;
 	max-width: calc(100vw - 2rem);
 	top: calc(100% + 2px);
 	right: 5vh;
@@ -180,7 +168,8 @@ header {
 }
 
 .hint .p1 {
-    font-size: 20px;
+    font-size: 17px;
+    font-family: "Noto Sans Thai";
 }
 
 
@@ -199,15 +188,13 @@ header {
 /* CONTENT */
 
 label {
-
     color: #FFF;
     font-weight: 500;
     font-size: 22px;
-
 }
 
 .content {
-    display: flex;
+    display: block;
     position: center;
 
     align-items: center;
@@ -216,14 +203,14 @@ label {
 
 .select-left {
     position: fixed;
-    margin-top: 80vh;
+    margin-top: 40vh;
     margin-left: 30vh;
 
 }
 
 .select-right{
     position: fixed;
-    margin-top: 80vh;
+    margin-top: 40vh;
     margin-left: 115vh;
 
 }
@@ -237,7 +224,7 @@ label {
 }
 
 .button {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -247,10 +234,8 @@ label {
   flex-shrink: 0;
   border-radius: 10px;
   
-  margin-top: 35vw;
+  margin-top: 40vw;
   margin-left: 85vh;
-  margin-right: 85vh;
-  margin-bottom: 35vw;
 }
 
 
@@ -268,22 +253,22 @@ label {
   font-weight: 500;
 }
 
-.modal {
+.output {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 25vw;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(77, 77, 77, .7);
   transition: all .4s;
 }
 
-.modal:target {
+.output:target {
   visibility: visible;
   opacity: 1;
 }
@@ -302,6 +287,55 @@ label {
   text-align: center;
 }
 
+.nodelay {
+  display: none; /* ซ่อนเนื้อหา .nodelay เมื่อไม่ตรงเงื่อนไข */
+  border-radius: 10px 10px 10px 10px;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  background: #fff;
+  padding: 0;
+  width: 498px;
+  height: 273px;
+
+  text-align: center;
+
+  margin-top: 90vh;
+}
+
+.delay {
+  display: none; /* ซ่อนเนื้อหา .delay เมื่อไม่ตรงเงื่อนไข */
+
+  border-radius: 10px 10px 10px 10px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  background: #fff;
+  padding: 0;
+  width: 498px;
+  height: 273px;
+
+  text-align: center;
+
+  margin-top: 90vh;
+}
+
+.nodelay .h1-nodelay,
+.nodelay .text-nodelay,
+.nodelay .modal__footer__nodelay {
+  display: block; /* แสดงเนื้อหา .h1-nodelay, .text-nodelay, .modal__footer__nodelay ใน .nodelay เมื่อตรงเงื่อนไข */
+}
+
+.delay .h2-delay,
+.delay .text-delay,
+.delay .modal__footer__delay {
+  display: block; /* แสดงเนื้อหา .h2-delay, .text-delay, .modal__footer__delay ใน .delay เมื่อตรงเงื่อนไข */
+}
+
+
+
 .h1-nodelay {
   position: fixed;
   text-align: center;
@@ -314,7 +348,7 @@ label {
 }
 
 .h2-delay {
-  position: fixed;
+  position: center;
   padding: 0em 3.5em 0em 3em;
   color: red;
   font-size: 45px;
@@ -323,51 +357,43 @@ label {
   line-height: normal;
 }
 
-.text-nodelay {
-  position: fixed;
-  padding: 5.5em 1em 0em 2em;
+.text-node {
+  position: center;
+  font-family: "Noto Sans Thai";
   font-size: 20px;
 }
 
-.text-delay {
-  position: fixed;
-  padding: 5.5em 1em 0em 2em;
-  font-size: 20px;
-}
-
-.h2-delay {
-  color: red;
-  font-size: 45px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+.text-node {
+  position: center;
+  font-family: "Noto Sans Thai";
+  margin-top: 8em;
 }
 
 .modal__footer__nodelay {
-  display: block;
   width: 498px;
   height: 19px;
   border-radius: 0px 0px 10px 10px;
   background: #228300;
   position: fixed;
-  margin-top: 16em;
+  margin-top: 0.3em;
 }
 
 .modal__footer__delay {
-  display: block;
   width: 498px;
   height: 19px;
   border-radius: 0px 0px 10px 10px;
   background: red;
   position: fixed;
-  margin-top: 16em;
+  margin-top: 5em;
+
 }
 
 
 .modal__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: fixed;
+  top: 33vh;
+  left: 61vw;
+  right: 20vw;
   color: #585858;
   text-decoration: none;
 }

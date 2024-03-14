@@ -1,34 +1,32 @@
-//Model
-let loadedModel;
 
-let output = document.querySelector('output');
+import * as tf from '@tensorflow/tfjs';
+
 
 let model;
-// โหลด JSON โมเดล
+let modelData;
+
+// โหลดโมเดล
 async function loadModel() {
   try {
     const response = await fetch('https://raw.githubusercontent.com/babylionas/Datamining/main/model/best_model_params.json');
     if (!response.ok) {
       throw new Error('Failed to load model JSON');
     }
-    const modelData = await response.json();
+    modelData = await response.json();
     console.log('Model loaded successfully:', modelData);
-    
-    // ทำสิ่งที่ต้องการกับข้อมูลโมเดลที่โหลด เช่น ใช้ในการทำนาย
-    // ตัวอย่างการใช้งาน:
-    const bootstrap = modelData.bootstrap;
-    const criterion = modelData.criterion;
-    const maxDepth = modelData.max_depth;
-    const minSamplesLeaf = modelData.min_samples_leaf;
-    const minSamplesSplit = modelData.min_samples_split;
-    const nEstimators = modelData.n_estimators;
+
+    // สร้างโมเดลจากข้อมูลที่โหลด
+    model = await tf.loadLayersModel('C:/code/Datamining/Project/public/model.json');
+
+    // ทำการ normalize ค่าที่ได้จาก JSON ของโมเดล
+    const { bootstrap, criterion, max_depth, min_samples_leaf, min_samples_split, n_estimators } = modelData;
 
     console.log('Bootstrap:', bootstrap);
     console.log('Criterion:', criterion);
-    console.log('Max Depth:', maxDepth);
-    console.log('Min Samples Leaf:', minSamplesLeaf);
-    console.log('Min Samples Split:', minSamplesSplit);
-    console.log('Number of Estimators:', nEstimators);
+    console.log('Max Depth:', max_depth);
+    console.log('Min Samples Leaf:', min_samples_leaf);
+    console.log('Min Samples Split:', min_samples_split);
+    console.log('Number of Estimators:', n_estimators);
 
   } catch (error) {
     console.error('Error loading the model:', error);
@@ -38,11 +36,20 @@ async function loadModel() {
 // เรียกใช้ฟังก์ชันโหลดโมเดล
 loadModel();
 
-// ฟังก์ชันทำนายผลลัพธ์จากโมเดล
-function makePrediction(model, inputData) {
-  const prediction = /* ทำนายผลลัพธ์จากโมเดลโดยใช้ข้อมูล input */ 0;
-  return prediction;
+function makePrediction(inputData) {
+  if (!model) {
+    console.error('Model is not loaded yet.');
+    return;
+  }
+
+  // ทำการทำนายด้วยโมเดล AI
+  const inputTensor = tf.tensor2d(inputData, [1, inputData.length]);
+  const prediction = model.predict(inputTensor);
+  const predictedClass = prediction.argMax(1).dataSync()[0];
+  console.log('Predicted Class:', predictedClass);
+  return predictedClass;
 }
+
 
 // Airline dropdown backend
 const searchBoxAirline = document.querySelector('.search-box-airline');
@@ -63,14 +70,27 @@ const optionsDesair = Array.from(dropdownListDesair.getElementsByTagName('li'));
 searchBoxAirline.addEventListener('input', function() {
   const searchValue = this.value.toLowerCase();
   dropdownListAirline.style.display = 'block';
-  optionsAirline.forEach(option => {
+  
+  // Filter options based on search input
+  const filteredOptions = optionsAirline.filter(option => {
     const text = option.textContent.toLowerCase();
-    if (text.includes(searchValue)) {
-      option.style.display = 'block';
-    } else {
-      option.style.display = 'none';
-    }
+    return text.includes(searchValue);
   });
+
+  // Clear previous list items
+  dropdownListAirline.innerHTML = '';
+
+  // If no data found, display "no data"
+  if (filteredOptions.length === 0) {
+    const noDataItem = document.createElement('li');
+    noDataItem.textContent = '- No data - ';
+    dropdownListAirline.appendChild(noDataItem);
+  } else {
+    // Populate dropdown with filtered options
+    filteredOptions.forEach(option => {
+      dropdownListAirline.appendChild(option);
+    });
+  }
 });
 
 // Handle option selection - Airline
@@ -82,18 +102,32 @@ optionsAirline.forEach(option => {
   });
 });
 
+
 // Show dropdown and filter options based on search input - Departure
 searchBoxDeair.addEventListener('input', function() {
   const searchValue = this.value.toLowerCase();
   dropdownListDeair.style.display = 'block';
-  optionsDeair.forEach(option => {
+
+  // Filter options based on search input
+  const filteredOptions = optionsDeair.filter(option => {
     const text = option.textContent.toLowerCase();
-    if (text.includes(searchValue)) {
-      option.style.display = 'block';
-    } else {
-      option.style.display = 'none';
-    }
+    return text.includes(searchValue);
   });
+
+  // Clear previous list items
+  dropdownListDeair.innerHTML = '';
+
+  // If no data found, display "no data"
+  if (filteredOptions.length === 0) {
+    const noDataItem = document.createElement('li');
+    noDataItem.textContent = '- No data - ';
+    dropdownListDeair.appendChild(noDataItem);
+  } else {
+    // Populate dropdown with filtered options
+    filteredOptions.forEach(option => {
+      dropdownListDeair.appendChild(option);
+    });
+  }
 });
 
 // Handle option selection - Departure
@@ -105,21 +139,34 @@ optionsDeair.forEach(option => {
   });
 });
 
-// Show dropdown and filter options based on search input - Departure
+// Show dropdown and filter options based on search input - Destination
 searchBoxDesair.addEventListener('input', function() {
   const searchValue = this.value.toLowerCase();
   dropdownListDesair.style.display = 'block';
-  optionsDesair.forEach(option => {
+
+  // Filter options based on search input
+  const filteredOptions = optionsDesair.filter(option => {
     const text = option.textContent.toLowerCase();
-    if (text.includes(searchValue)) {
-      option.style.display = 'block';
-    } else {
-      option.style.display = 'none';
-    }
+    return text.includes(searchValue);
   });
+
+  // Clear previous list items
+  dropdownListDesair.innerHTML = '';
+
+  // If no data found, display "no data"
+  if (filteredOptions.length === 0) {
+    const noDataItem = document.createElement('li');
+    noDataItem.textContent = '- No data -';
+    dropdownListDesair.appendChild(noDataItem);
+  } else {
+    // Populate dropdown with filtered options
+    filteredOptions.forEach(option => {
+      dropdownListDesair.appendChild(option);
+    });
+  }
 });
 
-// Handle option selection - Departure
+// Handle option selection - Destination
 optionsDesair.forEach(option => {
   option.addEventListener('click', function() {
     const selectedOption = this.textContent;
@@ -127,6 +174,7 @@ optionsDesair.forEach(option => {
     dropdownListDesair.style.display = 'none';
   });
 });
+
 
 //Time on departure - ACTION 
 
@@ -149,21 +197,21 @@ function handleTimeInput(input) {
     }
 }
 
-function convertToMinutes(time) {
-  const [timeStr, period] = time.split(' '); // แยกเวลาและช่วงเวลา (AM/PM)
-  const [hour, minute] = timeStr.split(':').map(item => parseInt(item)); // แยกชั่วโมงและนาที
-  
-  // คำนวณชั่วโมงและนาทีให้เป็นนาทีทั้งหมด
+// Normalize time to be between 0 and 1
+function normalizeTime(time) {
+  const maxTime = 1439; // 23:59 เป็นนาที
+  const minTime = 10; // 00:10 เป็นนาที
+  const [timeStr, period] = time.split(' ');
+  const [hour, minute] = timeStr.split(':').map(item => parseInt(item));
   let totalMinutes = hour * 60 + minute;
-  
-  // ตรวจสอบช่วงเวลา AM หรือ PM และปรับค่านาทีให้เป็นเวลาที่ถูกต้อง
+
   if (period === 'PM' && hour !== 12) {
-      totalMinutes += 12 * 60; // เพิ่ม 12 ชั่วโมงในกรณีที่เป็น PM และไม่ใช่เที่ยงคืน
+    totalMinutes += 12 * 60;
   } else if (period === 'AM' && hour === 12) {
-      totalMinutes -= 12 * 60; // ลบ 12 ชั่วโมงในกรณีที่เป็น AM และเป็นเที่ยงคืน
+    totalMinutes -= 12 * 60;
   }
-  
-  return totalMinutes;
+
+  return (totalMinutes - minTime) / (maxTime - minTime);
 }
 
 // ฟังก์ชันที่ใช้ในการหา index ของรายการที่เลือก
@@ -199,17 +247,12 @@ function findIndexInListDesairline(selectedValue) {
   return index;
 }
 
+
+
 //Button action
 
 document.addEventListener("DOMContentLoaded", function() {
-  const confirmButtons = document.querySelectorAll(".confirm-btn");
-  const confirmAllButton = document.querySelector(".confirm-all-btn");
-  const outputElement = document.getElementById('prediction');
-  const closeBtn = document.getElementById('closePredictionOutput');
-
-  closeBtn.addEventListener('click', function() {
-    outputElement.style.display = 'none';
-  });
+  const confirmAllButton = document.querySelector(".button a");
 
   confirmAllButton.addEventListener("click", function() {
     const selectedAirline = document.querySelector(".airline .search-box-airline").value;
@@ -235,60 +278,52 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Departure Index:", departureIndex);
         console.log("Destination Index:", destinationIndex);
 
+        console.log("Time :" , selectedTime);
+
         // ทำการ normalize ค่าของเวลา (time) เป็นนาที
 
-        const maxTime =  1439;
-        const minTime = 10;
-        const beforenalizedTime = convertToMinutes(selectedTime);
-        let normalizedTime = (beforenalizedTime-minTime) / (maxTime-minTime);
-        const resultNormalizeTime = normalizedTime; 
+        const normalizedTime = normalizeTime(selectedTime); // Normalize time
         console.log("Normalized Time (minutes):", resultNormalizeTime);
 
         // เตรียมข้อมูล input สำหรับทำนาย
-        const inputData = [airlineIndex, departureIndex,  destinationIndex, resultNormalizeTime];
-  
+        const inputData = [airlineIndex, departureIndex, destinationIndex, normalizedTime];
 
         // ทำการทำนายด้วยโมเดล AI
-        const prediction = makePrediction(loadedModel, inputData);
+        const prediction = makePrediction([inputData]);
         console.log("Prediction:", prediction);
 
         // แสดงผลลัพธ์การทำนาย
-        if (prediction === 0) {
-          outputElement.textContent = "Not Delay";
-          outputElement.classList.add('nodelay');
-          outputElement.classList.remove('delay');
-        } else if (prediction === 1) {
-          outputElement.textContent = "Delay";
-          outputElement.classList.add('delay');
-          outputElement.classList.remove('nodelay');
-        }
+        changeDetailOutput(prediction);
 
-        outputElement.style.display = 'block';
+
+
     } else {
         console.log("Please select all fields!");
-        outputElement.classList.remove('delay');
-        outputElement.classList.remove('nodelay');
-        outputElement.style.display = 'block';
     }
   });
 
 });
 
-  const confirmButton = document.querySelector('.confirm-all-button');
-  const detailsModalOverlay = document.querySelector('.details-modal-overlay');
+function changeDetailOutput(prediction) {
+  //const outputElement = document.querySelector('.output');
+  const delayElement = document.querySelector('.delay');
+  const nodelayElement = document.querySelector('.nodelay');
 
-  confirmButton.addEventListener('click', function() {
-    detailsModalOverlay.classList.add('show');
-  });
+  if (prediction === 0) {
+    // แสดงเฉพาะคลาสที่ต้องการ
+    delayElement.style.display = 'none'; // ซ่อน delay
+    nodelayElement.style.display = 'block'; // แสดง nodelay
+  } else if (prediction === 1) {
+    // แสดงเฉพาะคลsาสที่ต้องการ
+    nodelayElement.style.display = 'none'; // ซ่อน nodelay
+    delayElement.style.display = 'block'; // แสดง delay
+  }
+}
 
-  const detailsModalClose = document.querySelector('.details-modal-close');
 
-  detailsModalClose.addEventListener('click', function() {
-    detailsModalOverlay.classList.remove('show');
-  });
 
-  detailsModalClose.addEventListener('click', function() {
-    detailsModalOverlay.classList.remove('show');
-    document.querySelector('.details-modal-close').style.display = 'block';
-  });
+
+
+
+
   
