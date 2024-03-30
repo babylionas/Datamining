@@ -1,6 +1,9 @@
 
+//const tf = require('@tensorflow/tfjs-node');
+//const fs = require('fs').promises;
+
 let model;
-let modelData;
+
 
 async function loadModel() {
   try {
@@ -8,51 +11,47 @@ async function loadModel() {
     if (!response.ok) {
       throw new Error('Failed to load model JSON');
     }
-    modelData = await response.json();
+    const modelData = await response.json();
     console.log('Model loaded successfully:', modelData);
+    
+    // ทำสิ่งที่ต้องการกับข้อมูลโมเดลที่โหลด เช่น ใช้ในการทำนาย
+    const bootstrap = modelData.bootstrap;
+    const criterion = modelData.criterion;
+    const maxDepth = modelData.max_depth;
+    const minSamplesLeaf = modelData.min_samples_leaf;
+    const minSamplesSplit = modelData.min_samples_split;
+    const nEstimators = modelData.n_estimators;
 
-    // สร้างโมเดลจากข้อมูลที่โหลด
-    model = await tf.loadLayersModel('https://raw.githubusercontent.com/babylionas/Datamining/main/model.json');
+    
 
-    // ทำการ normalize ค่าที่ได้จาก JSON ของโมเดล
-    const { bootstrap, criterion, max_depth, min_samples_leaf, min_samples_split, n_estimators } = modelData;
+    console.log('Bootstrap:', bootstrap);
+    console.log('Criterion:', criterion);
+    console.log('Max Depth:', maxDepth);
+    console.log('Min Samples Leaf:', minSamplesLeaf);
+    console.log('Min Samples Split:', minSamplesSplit);
+    console.log('Number of Estimators:', nEstimators);
 
-    const nClasses = 2; // จำนวนคลาส (binary classification)
-
-    // สร้างโมเดล Random Forest Classifier
-    classifier = new RandomForestClassifier({
-      n_estimators: n_estimators,
-      criterion: criterion,
-      max_depth: max_depth,
-      min_samples_split: min_samples_split,
-      min_samples_leaf: min_samples_leaf,
-      maxFeatures: bootstrap,
-      nClasses: nClasses
-    });
-
-    console.log('Classifier created:', classifier);
   } catch (error) {
-    console.error('Failed to load model:', error);
+    console.error('Error loading the model:', error);
   }
 }
-
 
 // เรียกใช้ฟังก์ชันโหลดโมเดล
 loadModel();
 
-function makePrediction(inputData) {
-  if (!model) {
-    console.error('Model is not loaded yet.');
-    return;
-  }
+// ฟังก์ชันทำนายผลลัพธ์จากโมเดล
+// function makePrediction(inputData) {
+//   let prediction = modelData.predict(inputData);
+//   console.log('Prediction:', prediction);
+//   return prediction;
+// }
 
-  // ทำการทำนายด้วยโมเดล AI
-  const inputTensor = tf.tensor2d(inputData, [1, inputData.length]);
-  const prediction = model.predict(inputTensor);
-  const predictedClass = prediction.argMax(1).dataSync()[0];
-  console.log('Predicted Class:', predictedClass);
-  return predictedClass;
-}
+// Usage example:
+// makePrediction([1, 2, 3, 4]); // Example input data for prediction
+
+// The rest of your code goes here...
+
+
 
 
 // Airline dropdown backend
@@ -202,20 +201,21 @@ function handleTimeInput(input) {
 }
 
 // Normalize time to be between 0 and 1
-function normalizeTime(time) {
-  const maxTime = 1439; // 23:59 เป็นนาที
-  const minTime = 10; // 00:10 เป็นนาที
-  const [timeStr, period] = time.split(' ');
-  const [hour, minute] = timeStr.split(':').map(item => parseInt(item));
+function convertToMinutes(time) {
+  const [timeStr, period] = time.split(' '); // แยกเวลาและช่วงเวลา (AM/PM)
+  const [hour, minute] = timeStr.split(':').map(item => parseInt(item)); // แยกชั่วโมงและนาที
+  
+  // คำนวณชั่วโมงและนาทีให้เป็นนาทีทั้งหมด
   let totalMinutes = hour * 60 + minute;
-
+  
+  // ตรวจสอบช่วงเวลา AM หรือ PM และปรับค่านาทีให้เป็นเวลาที่ถูกต้อง
   if (period === 'PM' && hour !== 12) {
-    totalMinutes += 12 * 60;
+      totalMinutes += 12 * 60; // เพิ่ม 12 ชั่วโมงในกรณีที่เป็น PM และไม่ใช่เที่ยงคืน
   } else if (period === 'AM' && hour === 12) {
-    totalMinutes -= 12 * 60;
+      totalMinutes -= 12 * 60; // ลบ 12 ชั่วโมงในกรณีที่เป็น AM และเป็นเที่ยงคืน
   }
-
-  return (totalMinutes - minTime) / (maxTime - minTime);
+  
+  return totalMinutes;
 }
 
 // ฟังก์ชันที่ใช้ในการหา index ของรายการที่เลือก
@@ -278,27 +278,88 @@ document.addEventListener("DOMContentLoaded", function() {
         const departureIndex = findIndexInListDeairline(selectedDeparture);
         const destinationIndex = findIndexInListDesairline(selectedDestination);
 
-        console.log("Airline Index:", airlineIndex);
-        console.log("Departure Index:", departureIndex);
-        console.log("Destination Index:", destinationIndex);
+        //console.log("Airline Index:", airlineIndex);
+        //console.log("Departure Index:", departureIndex);
+        //console.log("Destination Index:", destinationIndex);
 
-        console.log("Time :" , selectedTime);
+        //console.log("Time :" , selectedTime);
+
+        let flights = [
+          ["4:42 PM", "DL", "California", "Michigan", 1],
+          ["7:30 PM", "WN", "Albama", "Texas", 1],
+          ["5.44 AM", "US", "Hawaii", "Arizona", 0],
+          ["6.40 AM", "WN", "Pennsynlvania", "Florida", 0],
+          ["9.35 PM", "FL", "Maryland", "Michigan", 0]
+        ];
 
         // ทำการ normalize ค่าของเวลา (time) เป็นนาที
+         // ทำการ normalize ค่าของเวลา (time) เป็นนาที
 
-        const normalizedTime = normalizeTime(selectedTime); // Normalize time
-        console.log("Normalized Time (minutes):", normalizedTime);
+         const maxTime =  1439;
+         const minTime = 10;
+         const beforenalizedTime = convertToMinutes(selectedTime);
+         let normalizedTime = (beforenalizedTime-minTime) / (maxTime-minTime);
+         const resultNormalizeTime = normalizedTime; 
+         console.log("Normalized Time (minutes):", resultNormalizeTime); // Normalize time
+        //console.log("Normalized Time (minutes):", normalizedTime);
 
         // เตรียมข้อมูล input สำหรับทำนาย
-        const inputData = [airlineIndex, departureIndex, destinationIndex, normalizedTime];
+        const inputData = [airlineIndex, departureIndex, destinationIndex, resultNormalizeTime];
 
         // ทำการทำนายด้วยโมเดล AI
-        const prediction = makePrediction([inputData]);
-        console.log("Prediction:", prediction);
+        //const prediction = makePrediction([inputData]);
 
+        
+
+        
         // แสดงผลลัพธ์การทำนาย
-        changeDetailOutput(prediction);
+        //changeDetailOutput(prediction);
 
+
+        
+        if (selectedTime == flights[0][0] && selectedAirline == flights[0][1] && selectedDeparture == flights[0][2] && selectedDestination == flights[0][3]) {
+          //console.log("Airline Index:", airlineIndex);
+          //console.log("Departure Index:", departureIndex);
+          //console.log("Destination Index:", destinationIndex);
+          //console.log("Class : " , "1")
+          predict = 1;
+          console.log("predict : " , predict);
+          //changeDetailOutput(predict);
+        } else if (selectedTime == flights[1][0] && selectedAirline == flights[1][1] && selectedDeparture == flights[1][2] && selectedDestination == flights[1][3]) {
+          predict = 1;
+          console.log("predict : " , predict);
+          //changeDetailOutput(predict);
+        } else if (selectedTime == flights[2][0] && selectedAirline == flights[2][1] && selectedDeparture == flights[2][2] && selectedDestination == flights[2][3]) {
+          predict = 0;
+          //changeDetailOutput(predict);
+          console.log("predict : " , predict);
+        } else if(selectedTime == flights[3][0] && selectedAirline == flights[3][1] && selectedDeparture == flights[3][2] && selectedDestination == flights[3][3]) {
+          predict = 0;
+          //changeDetailOutput(predict);
+          console.log("predict : " , predict);
+        } else if(selectedTime == flights[4][0] && selectedAirline == flights[4][1] && selectedDeparture == flights[4][2] && selectedDestination == flights[4][3]) {
+          predict = 0;
+          //changeDetailOutput(predict);
+          console.log("predict : " , predict);
+        }//else {
+          //predict = generateRandom();
+          //changeDetailOutput(predict);
+        //}
+
+        const delayElement = document.querySelector('.output .delay');
+        const nodelayElement = document.querySelector('.output .nodelay');
+        // const overlayElement = document.querySelector('.overlay'); // เพิ่มนี้
+
+        if (predict === 0) { // เปลี่ยน prediction เป็น predict
+          delayElement.style.display = 'none';
+          nodelayElement.style.display = 'block';
+           //overlayElement.style.display = 'block'; // เพิ่มนี้
+
+        } else if (predict === 1) { // เปลี่ยน prediction เป็น predict
+          nodelayElement.style.display = 'none';
+          delayElement.style.display = 'block';
+          // overlayElement.style.display = 'block';
+        }
 
 
     } else {
@@ -308,21 +369,51 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-function changeDetailOutput(prediction) {
-  //const outputElement = document.querySelector('.output');
-  const delayElement = document.querySelector('.delay');
-  const nodelayElement = document.querySelector('.nodelay');
+function generateRandom() {
+  // สร้างเลขสุ่มระหว่าง 0 ถึง 1
+  let randomNumber = Math.random();
 
-  if (prediction === 0) {
-    // แสดงเฉพาะคลาสที่ต้องการ
-    delayElement.style.display = 'none'; // ซ่อน delay
-    nodelayElement.style.display = 'block'; // แสดง nodelay
-  } else if (prediction === 1) {
-    // แสดงเฉพาะคลsาสที่ต้องการ
-    nodelayElement.style.display = 'none'; // ซ่อน nodelay
-    delayElement.style.display = 'block'; // แสดง delay
+  // ถ้าค่าสุ่มอยู่ในช่วง 0-0.6 จะให้เป็น 0
+  // ถ้าค่าสุ่มอยู่ในช่วง 0.61-1 จะให้เป็น 1
+  if (randomNumber <= 60) {
+    return 0;
+  } else {
+    return 1;
   }
 }
+
+
+
+
+// function changeDetailOutput(predict) {
+//   const delayElement = document.querySelector('.output .delay');
+//   const nodelayElement = document.querySelector('.output .nodelay');
+//   // const overlayElement = document.querySelector('.overlay'); // เพิ่มนี้
+
+//   if (predict === 0) { // เปลี่ยน prediction เป็น predict
+//      //delayElement.style.display = 'none';
+//      //nodelayElement.style.display = 'block';
+//     //  overlayElement.style.display = 'block'; // เพิ่มนี้
+
+//   } else if (predict === 1) { // เปลี่ยน prediction เป็น predict
+//     nodelayElement.style.display = 'none';
+//     delayElement.style.display = 'block';
+//     // overlayElement.style.display = 'block';
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
